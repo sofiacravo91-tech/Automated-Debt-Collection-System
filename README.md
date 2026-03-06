@@ -2,7 +2,7 @@
 
 # Automated Debt Collection System
 
-Workflow automation for identifying delinquent customers and triggering automated collection outreach.
+Workflow automation for  delinquent customers and triggering automated collection outreach.
 
 ## Problem
 
