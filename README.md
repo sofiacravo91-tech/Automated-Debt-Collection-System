@@ -25,6 +25,8 @@ Overdue accounts are maintained in a dedicated Google Sheets tab, where customer
 
 The workflow automatically reads this data and sends reminders through WhatsApp and email, reducing manual intervention in the collection process.
 
+To reduce the risk of WhatsApp account restrictions, the system applies operational safeguards such as limiting automated outreach to **20 messages per day** and using **contacts that previously had human interaction with the account**, minimizing the likelihood of spam reports.
+
 Customer data is managed through Google Sheets, enabling automated follow-ups, communication tracking, and scalable outreach operations.
 
 The project demonstrates how workflow automation can support fintech and revenue operations teams by simplifying the execution of collection actions.
@@ -35,7 +37,7 @@ The automated workflow operates through the following steps:
 
 1. Delinquent customers are listed in a Google Sheets tab
 2. n8n monitors this dataset for collection actions
-3. A Node.js script processes customer data
+3. A Node.js script processes customer data and applies daily message limits
 4. Puppeteer automates WhatsApp Web interactions
 5. Automated reminders are sent via WhatsApp and email
 6. Follow-up activity is recorded for operational tracking
@@ -66,7 +68,7 @@ Potential applications include:
 
 1. A delinquent customer is added to the Google Sheets delinquent accounts tab
 2. The workflow reads the new record
-3. The system triggers an automated WhatsApp reminder
+3. The system triggers an automated WhatsApp reminder (within the daily message limit)
 4. If payment is not completed, an email follow-up is sent
 5. Collection activity is logged for monitoring and analysis
 
