@@ -1,160 +1,73 @@
-# Automated-Debt-Collection-System
+**Technologies:** Node.js | n8n | Puppeteer | Workflow Automation | Fintech Operations
 
 # Automated Debt Collection System
 
-Sistema de automação de cobrança que prioriza clientes inadimplentes e realiza envios automáticos via **WhatsApp ou Email**, utilizando **n8n, Google Sheets e Puppeteer**.
+Workflow automation for identifying delinquent customers and triggering automated collection outreach.
 
-O sistema foi desenvolvido para reduzir trabalho manual, organizar filas de cobrança e garantir envio inteligente baseado em prioridade e atraso.
+## Problem
 
----
+Fintech and revenue operations teams often rely on manual processes to identify delinquent customers and initiate collection outreach. These processes are time-consuming, difficult to scale, and may delay contact with overdue accounts.
 
-# Arquitetura do Sistema
+Without automation, operations teams face challenges such as:
 
-Google Sheets → Filtragem e priorização → Geração de mensagens → Envio automático
+- prioritizing customers based on overdue status  
+- triggering timely follow-ups  
+- maintaining consistent communication channels  
+- tracking collection actions across multiple customers  
 
-Workflow:
+## Solution
 
-Google Sheets → Code (Filtrar e Priorizar)
-             → Update (Agendado / Adiado)
-             → Code (Gerar Links)
-             → IF Canal
-                → WhatsApp → Puppeteer Bot
-                → Email → Gmail SMTP
-             → Atualização de status na planilha
+This project implements an **automated debt collection workflow** that identifies delinquent customers and triggers outreach actions automatically.
 
----
+The system prioritizes overdue accounts and sends automated reminders through **WhatsApp and email**, reducing manual intervention in the collection process.
 
-# Tecnologias utilizadas
+Customer data is managed through **Google Sheets**, enabling automated **customer segmentation, prioritization of accounts, and payment follow-ups**.
 
-- n8n (Workflow Automation)
-- Google Sheets API
-- Node.js
-- Puppeteer
-- Gmail SMTP
-- WhatsApp Web Automation
+The workflow demonstrates how **automation and data-driven prioritization** can improve operational efficiency in **fintech and revenue operations environments**.
 
----
+## Workflow Architecture
 
-# Estrutura da Carteira
+The automated workflow operates through the following steps:
 
-Planilha Google Sheets com 239 clientes contendo:
+1. Customer payment data is stored in **Google Sheets**  
+2. **n8n** monitors overdue accounts  
+3. A **Node.js script** processes the data and prioritizes delinquent customers  
+4. **Puppeteer** automates WhatsApp Web interactions  
+5. Automated reminders are sent via **WhatsApp and email**  
+6. Follow-up activity is recorded for operational tracking  
 
-| Campo | Descrição |
-|------|------|
-| Nome | Nome do cliente |
-| Telefone | Telefone para WhatsApp |
-| Email | Email do cliente |
-| Canal | Canal de cobrança (WhatsApp / Email) |
-| Dias de atraso | Tempo de inadimplência |
-| Score | Score de cobrança |
-| Prioridade | Peso na fila |
-| Envio status | Agendado / Adiado / Enviado |
-| Status | WhatsApp enviado / Email enviado |
+## Tech Stack
 
----
+- **n8n** — workflow automation  
+- **Node.js** — automation logic and data processing  
+- **Puppeteer** — browser automation for WhatsApp messaging  
+- **Google Sheets** — customer data source and segmentation  
 
-# Lógica de Prioridade
+## Business Impact
 
-O sistema filtra automaticamente:
+This workflow demonstrates how automation can support **collection operations and revenue teams** by:
 
-- Clientes com **data ≤ hoje**
-- **Status ativo**
-- **Canal automático**
-- **Envio status ≠ Enviado**
+- reducing manual collection workload  
+- enabling scalable customer follow-ups  
+- improving response time for delinquent accounts  
+- supporting data-driven prioritization of collection efforts  
 
-Após o filtro:
+Potential applications include:
 
-1. Ordena por  
-   - Prioridade  
-   - Score  
-   - Dias de atraso  
+- fintech operations  
+- revenue operations  
+- payment recovery teams  
 
-2. Seleciona:
-   - **20 primeiros → Agendado**
-   - **Restante → Adiado**
+## Example Use Case
 
----
+1. A customer becomes overdue on a payment  
+2. The system detects the delinquency in Google Sheets  
+3. The workflow triggers an automated WhatsApp reminder  
+4. If payment is not completed, an email follow-up is sent  
+5. Collection activity is logged for monitoring and analysis  
 
-# Envio via WhatsApp
+## Repository
 
-Bot desenvolvido em **Node.js + Puppeteer**.
+Project repository:
 
-Funções:
-
-- Abre sessão persistente
-- Gera link de envio
-- Abre conversa automaticamente
-- Envia mensagem
-
-Endpoint HTTP:
-
-```
-POST http://localhost:3001/enviar
-```
-
-Sessão armazenada em:
-
-```
-C:\cobranca-bot\whatsapp-session
-```
-
----
-
-# Envio via Email
-
-Emails enviados via **Gmail SMTP** com template HTML.
-
-Características:
-
-- Layout profissional
-- Sem marca n8n
-- Personalização por cliente
-
----
-
-# Automação diária
-
-Workflow configurado para executar automaticamente às **08:00**.
-
-Fluxo:
-
-1. Ler carteira
-2. Priorizar clientes
-3. Enviar mensagens
-4. Atualizar status
-5. Registrar histórico
-
----
-
-# Execução local
-
-Iniciar n8n:
-
-```bash
-n8n start
-```
-
-Iniciar bot WhatsApp:
-
-```bash
-cd C:\cobranca-bot
-node index.js
-```
-
----
-
-# Resultados
-
-- Automação completa da cobrança
-- Redução de trabalho manual
-- Organização inteligente da carteira
-- Envio multicanal automatizado
-
----
-
-# Melhorias futuras
-
-- Dashboard de cobrança
-- Métricas de recuperação
-- Integração com CRM
-- IA para personalização de mensagens
+https://github.com/sofiacravo91-tech/Automated-Debt-Collection-System
